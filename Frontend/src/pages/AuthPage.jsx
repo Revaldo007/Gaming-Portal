@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { AlertCircle, Gamepad2, LogIn, UserPlus } from "lucide-react";
+import { AlertCircle, LogIn, UserPlus } from "lucide-react";
 import { THEME } from "../theme";
 import { useAuth } from "../context/AuthContext";
 
@@ -47,7 +47,7 @@ export default function AuthPage() {
 
   return (
     <div
-      className="min-h-screen w-full flex items-center justify-center px-4"
+      className="min-h-screen w-full flex flex-col items-center justify-center px-4 py-8 relative overflow-hidden"
       style={{
         background: `radial-gradient(circle at 15% 20%, rgba(139,108,246,0.25), transparent 45%),
                      radial-gradient(circle at 85% 80%, rgba(245,71,140,0.2), transparent 45%),
@@ -63,20 +63,40 @@ export default function AuthPage() {
         .auth-input:focus { border-color: ${THEME.violet} !important; box-shadow: 0 0 0 3px rgba(139,108,246,0.25); }
       `}</style>
 
+      {/* Main Portal Title */}
+      <div className="text-center mb-12 sm:mb-16 -mt-8 sm:-mt-12 max-w-3xl px-4">
+        <h1
+          className="text-xl sm:text-2xl md:text-3xl font-extrabold tracking-tight leading-snug"
+          style={{
+            background: `linear-gradient(135deg, #FFFFFF 20%, ${THEME.cream} 50%, ${THEME.violet} 100%)`,
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            filter: "drop-shadow(0 2px 16px rgba(139,108,246,0.35))",
+          }}
+        >
+          Multi-Game Web Portal with User Authentication and Score Management
+        </h1>
+        <div
+          className="h-1 w-24 mx-auto mt-3 rounded-full"
+          style={{ background: `linear-gradient(90deg, ${THEME.violet}, ${THEME.pink})` }}
+        />
+      </div>
+
       <div className="w-full max-w-sm">
-        <div className="flex flex-col items-center gap-2 mb-8">
-          <div
-            className="w-14 h-14 rounded-2xl flex items-center justify-center text-3xl"
-            style={{ background: `linear-gradient(135deg, ${THEME.violet}, ${THEME.pink})` }}
-          >
-            <Gamepad2 size={28} color="#fff" />
+        <div className="flex flex-col items-center gap-3 mb-8">
+          <div className="relative flex items-center justify-center">
+            {/* Glowing aura effect */}
+            <div
+              className="absolute w-20 h-20 rounded-full blur-xl opacity-60 pointer-events-none"
+              style={{ background: `linear-gradient(135deg, ${THEME.violet}, ${THEME.pink})` }}
+            />
+            {/* Animated Controller GIF */}
+            <img
+              src="/Controller.gif"
+              alt="Gaming Controller"
+              className="relative w-20 h-20 object-contain drop-shadow-[0_10px_20px_rgba(139,108,246,0.35)]"
+            />
           </div>
-          <p className="font-bold text-lg" style={{ color: THEME.cream }}>
-            GAMING <span style={{ color: THEME.violet }}>PORTAL</span>
-          </p>
-          <p className="text-sm text-center" style={{ color: THEME.muted }}>
-            {mode === "login" ? "Sign in to pick up where you left off." : "Create an account to start playing."}
-          </p>
         </div>
 
         <div
@@ -181,6 +201,28 @@ export default function AuthPage() {
             {mode === "login" ? "Create an account" : "Log in instead"}
           </button>
         </p>
+      </div>
+
+      {/* Project Credits (Bottom-Right) */}
+      <div className="sm:absolute bottom-6 right-8 mt-6 sm:mt-0 text-right z-10">
+        <div
+          className="px-5 py-3 rounded-2xl border backdrop-blur-md inline-block text-right shadow-2xl"
+          style={{
+            borderColor: "rgba(139, 108, 246, 0.25)",
+            background: "rgba(18, 23, 42, 0.75)",
+            boxShadow: "0 10px 30px rgba(0, 0, 0, 0.4)",
+          }}
+        >
+          <p className="text-sm sm:text-base font-bold tracking-wide" style={{ color: THEME.cream }}>
+            Benazir
+          </p>
+          <p className="text-[11px] sm:text-xs font-medium my-0.5 tracking-wider uppercase" style={{ color: THEME.muted }}>
+            Guidance by
+          </p>
+          <p className="text-sm sm:text-base font-semibold" style={{ color: THEME.violet }}>
+            Jeba Mallar (HOD)
+          </p>
+        </div>
       </div>
     </div>
   );
