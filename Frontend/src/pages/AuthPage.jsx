@@ -220,7 +220,7 @@ export default function AuthPage() {
             Guidance by
           </p>
           <p className="text-sm sm:text-base font-semibold" style={{ color: THEME.violet }}>
-            Jeba Mallar (HOD)
+            Jeba Malar (HOD)
           </p>
         </div>
       </div>
