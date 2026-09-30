@@ -5,7 +5,7 @@ Password hashing uses bcrypt directly (no passlib) to avoid the
 unmaintained bcrypt-version-detection code.
 JWT is intentionally kept simple: a signed payload containing user_id.
 """
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from typing import Optional
 
 import bcrypt
@@ -32,7 +32,7 @@ def verify_password(plain: str, hashed: str) -> bool:
 # ── JWT helpers ───────────────────────────────────────────────────────────────
 
 def create_access_token(user_id: int, expires_delta: Optional[timedelta] = None) -> str:
-    expire = datetime.utcnow() + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
+    expire = datetime.now(timezone.utc) + (expires_delta or timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES))
     payload = {"sub": str(user_id), "exp": expire}
     return jwt.encode(payload, SECRET_KEY, algorithm=ALGORITHM)
 

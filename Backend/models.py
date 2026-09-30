@@ -2,9 +2,14 @@
 Gaming Portal – Database Models
 Uses SQLModel (SQLAlchemy + Pydantic hybrid) with SQLite.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional
 from sqlmodel import Field, SQLModel
+
+
+def get_utc_now() -> datetime:
+    """Return current timezone-aware UTC datetime."""
+    return datetime.now(timezone.utc)
 
 
 # ─── User ─────────────────────────────────────────────────────────────────────
@@ -20,7 +25,7 @@ class User(UserBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     hashed_password: str
     coins: int = Field(default=120)
-    created_at: datetime = Field(default_factory=datetime.utcnow)
+    created_at: datetime = Field(default_factory=get_utc_now)
 
 
 class UserCreate(UserBase):
@@ -56,7 +61,7 @@ class ScoreBase(SQLModel):
 class Score(ScoreBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id", index=True)
-    played_at: datetime = Field(default_factory=datetime.utcnow)
+    played_at: datetime = Field(default_factory=get_utc_now)
 
 
 class ScoreCreate(ScoreBase):
@@ -80,7 +85,7 @@ class AchievementBase(SQLModel):
 class Achievement(AchievementBase, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: int = Field(foreign_key="user.id", index=True)
-    earned_at: datetime = Field(default_factory=datetime.utcnow)
+    earned_at: datetime = Field(default_factory=get_utc_now)
 
 
 class AchievementRead(AchievementBase):

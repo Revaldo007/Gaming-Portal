@@ -1,6 +1,6 @@
 import sys
 sys.stdout.reconfigure(encoding='utf-8')
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from sqlmodel import Session, select, create_engine
 from models import User, Score
 from auth import hash_password
@@ -57,7 +57,7 @@ if len(existing) <= 1:
             avatar_emoji=comp["avatar_emoji"],
             coins=comp["coins"],
             hashed_password=hash_password("DemoPassword123!"),
-            created_at=datetime.utcnow() - timedelta(days=2),
+            created_at=datetime.now(timezone.utc) - timedelta(days=2),
         )
         session.add(user)
         session.flush()
@@ -69,7 +69,7 @@ if len(existing) <= 1:
                 game_name=s["game_name"],
                 score=s["score"],
                 result=s["result"],
-                played_at=datetime.utcnow() - timedelta(hours=5),
+                played_at=datetime.now(timezone.utc) - timedelta(hours=5),
             )
             session.add(score)
 
