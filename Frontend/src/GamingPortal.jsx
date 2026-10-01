@@ -4357,11 +4357,30 @@ function TopBar({ setMobileOpen, query, setQuery, onSearchFocus, coins, recentSc
         background: "rgba(10,14,26,0.85)",
         boxShadow: scrolled ? "0 8px 24px rgba(0,0,0,0.35)" : "none",
       }}>
-      <button className="sm:hidden" onClick={() => setMobileOpen(true)}>
+      <button className="sm:hidden flex-shrink-0" onClick={() => setMobileOpen(true)}>
         <Menu size={20} color={THEME.cream} />
       </button>
 
-      <div className="ml-auto flex items-center gap-2 sm:gap-3">
+      <div className="min-w-0 flex-1 mr-2 sm:mr-4">
+        <h1
+          className="text-xs sm:text-[13px] font-semibold tracking-tight truncate select-none"
+          title="Multi-Game Web Portal with User Authentication and Score Management"
+        >
+          <span style={{ color: THEME.cream }}>Multi-Game Web Portal</span>{" "}
+          <span
+            style={{
+              background: `linear-gradient(90deg, ${THEME.violet}, ${THEME.pink})`,
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            with User Authentication and Score Management
+          </span>
+        </h1>
+      </div>
+
+      <div className="ml-auto flex items-center gap-2 sm:gap-3 flex-shrink-0">
         <div className="relative">
           <button onClick={() => { setNotifOpen((v) => !v); setAvatarOpen(false); }}
             className="btn-press relative w-9 h-9 rounded-full flex items-center justify-center border"
